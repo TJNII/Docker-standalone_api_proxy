@@ -12,15 +12,14 @@ RUN apt-get update && apt-get upgrade -y
 # Install Nginx
 RUN apt-get install -y nginx
 
-# Add the docker group
-# This GID is likely different from system to system, unfortunately...
-RUN groupadd -g 118 docker
-
 # Add nginx user
-RUN useradd -d /tmp -s /bin/false -G docker nginx
+RUN useradd -d /tmp -s /bin/false nginx
 
 # Install the nginx config
 ADD files/etc/nginx /etc/nginx
 
+# Add the start script which will set the correct group permissions and start nginx
+ADD files/starter.sh /starter.sh
+
 EXPOSE 2375
-CMD ["/usr/sbin/nginx", "-c", "/etc/nginx/nginx.conf"]
+CMD ["/starter.sh"]
