@@ -10,7 +10,6 @@ Known Issues
 ------------
 
 * Interactive sessions don't work
-* The Nginx user needs to be a member of the docker group, and the GID is likely not standard across hosts.  See the groupadd in the Dockerfile.
 
 Running
 -------
